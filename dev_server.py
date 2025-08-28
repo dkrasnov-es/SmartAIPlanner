@@ -2,10 +2,6 @@ import os
 from flask import Flask, request, jsonify, send_from_directory
 import requests
 
-# Set environment variables directly
-os.environ.setdefault('GEMINI_API_KEY', 'AIzaSyBExK5OPJytLpj1-IKCqgzZPrWzpMjK1ds')
-os.environ.setdefault('GEMINI_MODEL', 'gemini-1.5-flash')
-
 app = Flask(__name__, static_folder='.', static_url_path='')
 
 
@@ -66,7 +62,7 @@ def api_gemini():
 
 
 if __name__ == '__main__':
-    # Runs on http://127.0.0.1:8080
-    app.run(host='127.0.0.1', port=8080, debug=False)
-
+    # Railway sets the PORT environment variable
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port, debug=False)
 
